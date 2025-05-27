@@ -1,0 +1,426 @@
+[
+  {
+    "src": "logo1.png",
+    "alt": "1 Company=Mailchimp"
+  },
+  {
+    "src": "logo2.png",
+    "alt": "2 Company=Slack"
+  },
+  {
+    "src": "logo3.png",
+    "alt": "3 Company=PayPal"
+  },
+  {
+    "src": "logo4.png",
+    "alt": "4 Company=Shopify"
+  },
+  {
+    "src": "logo5.png",
+    "alt": "5 Company=Netflix"
+  },
+  {
+    "src": "logo6.png",
+    "alt": "6 Company=Upwork"
+  },
+  {
+    "src": "logo7.png",
+    "alt": "Company=ActiveCampaign"
+  },
+  {
+    "src": "logo8.png",
+    "alt": "Company=Adobe"
+  },
+  {
+    "src": "logo9.png",
+    "alt": "Company=Afterpay"
+  },
+  {
+    "src": "logo10.png",
+    "alt": "Company=Airbnb"
+  },
+  {
+    "src": "logo11.png",
+    "alt": "Company=Airtable"
+  },
+  {
+    "src": "logo12.png",
+    "alt": "Company=Airtasker"
+  },
+  {
+    "src": "logo13.png",
+    "alt": "Company=Airwallex"
+  },
+  {
+    "src": "logo14.png",
+    "alt": "Company=Amazon"
+  },
+  {
+    "src": "logo15.png",
+    "alt": "Company=Amplitude"
+  },
+  {
+    "src": "logo16.png",
+    "alt": "Company=Asana"
+  },
+  {
+    "src": "logo17.png",
+    "alt": "Company=Atlassian"
+  },
+  {
+    "src": "logo18.png",
+    "alt": "Company=Attentive"
+  },
+  {
+    "src": "logo19.png",
+    "alt": "Company=Automattic"
+  },
+  {
+    "src": "logo20.png",
+    "alt": "Company=Basecamp"
+  },
+  {
+    "src": "logo21.png",
+    "alt": "Company=Booking.com"
+  },
+  {
+    "src": "logo22.png",
+    "alt": "Company=Braze"
+  },
+  {
+    "src": "logo23.png",
+    "alt": "Company=BrowserStack"
+  },
+  {
+    "src": "logo24.png",
+    "alt": "Company=Calendly"
+  },
+  {
+    "src": "logo25.png",
+    "alt": "Company=Canva"
+  },
+  {
+    "src": "logo26.png",
+    "alt": "Company=Carta"
+  },
+  {
+    "src": "logo27.png",
+    "alt": "Company=Clearbit"
+  },
+  {
+    "src": "logo28.png",
+    "alt": "Company=Codecademy"
+  },
+  {
+    "src": "logo29.png",
+    "alt": "Company=Coinbase"
+  },
+  {
+    "src": "logo30.png",
+    "alt": "Company=Contentful"
+  },
+  {
+    "src": "logo31.png",
+    "alt": "Company=Culture Amp"
+  },
+  {
+    "src": "logo32.png",
+    "alt": "Company=Customer.io"
+  },
+  {
+    "src": "logo33.png",
+    "alt": "Company=Databricks"
+  },
+  {
+    "src": "logo34.png",
+    "alt": "Company=Descript"
+  },
+  {
+    "src": "logo35.png",
+    "alt": "Company=Discord"
+  },
+  {
+    "src": "logo36.png",
+    "alt": "Company=Docker"
+  },
+  {
+    "src": "logo37.png",
+    "alt": "Company=Docusign"
+  },
+  {
+    "src": "logo38.png",
+    "alt": "Company=DoorDash"
+  },
+  {
+    "src": "logo39.png",
+    "alt": "Company=Dribbble"
+  },
+  {
+    "src": "logo40.png",
+    "alt": "Company=Drips"
+  },
+  {
+    "src": "logo41.png",
+    "alt": "Company=Dropbox"
+  },
+  {
+    "src": "logo42.png",
+    "alt": "Company=Elastic"
+  },
+  {
+    "src": "logo43.png",
+    "alt": "Company=Evernote"
+  },
+  {
+    "src": "logo44.png",
+    "alt": "Company=Figma"
+  },
+  {
+    "src": "logo45.png",
+    "alt": "Company=Fivetran"
+  },
+  {
+    "src": "logo46.png",
+    "alt": "Company=Framer"
+  },
+  {
+    "src": "logo47.png",
+    "alt": "Company=Freshworks"
+  },
+  {
+    "src": "logo48.png",
+    "alt": "Company=Ghost"
+  },
+  {
+    "src": "logo49.png",
+    "alt": "Company=GitHub"
+  },
+  {
+    "src": "logo50.png",
+    "alt": "Company=Gitlab"
+  },
+  {
+    "src": "logo51.png",
+    "alt": "Company=Gong"
+  },
+  {
+    "src": "logo52.png",
+    "alt": "Company=Google"
+  },
+  {
+    "src": "logo53.png",
+    "alt": "Company=Grammarly"
+  },
+  {
+    "src": "logo54.png",
+    "alt": "Company=Gumroad"
+  },
+  {
+    "src": "logo55.png",
+    "alt": "Company=Gusto"
+  },
+  {
+    "src": "logo56.png",
+    "alt": "Company=HashiCorp"
+  },
+  {
+    "src": "logo57.png",
+    "alt": "Company=Hellosign"
+  },
+  {
+    "src": "logo58.png",
+    "alt": "Company=Himalayas"
+  },
+  {
+    "src": "logo59.png",
+    "alt": "Company=Hopin"
+  },
+  {
+    "src": "logo60.png",
+    "alt": "Company=Hotjar"
+  },
+  {
+    "src": "logo61.png",
+    "alt": "Company=Hubspot"
+  },
+  {
+    "src": "logo62.png",
+    "alt": "Company=Instagram"
+  },
+  {
+    "src": "logo63.png",
+    "alt": "Company=Intercom"
+  },
+  {
+    "src": "logo64.png",
+    "alt": "Company=InVision"
+  },
+  {
+    "src": "logo65.png",
+    "alt": "Company=Lattice"
+  },
+  {
+    "src": "logo66.png",
+    "alt": "Company=LaunchDarkly"
+  },
+  {
+    "src": "logo67.png",
+    "alt": "Company=Linear"
+  },
+  {
+    "src": "logo68.png",
+    "alt": "Company=Loom"
+  },
+  {
+    "src": "logo69.png",
+    "alt": "Company=Maze"
+  },
+  {
+    "src": "logo70.png",
+    "alt": "Company=Medium"
+  },
+  {
+    "src": "logo71.png",
+    "alt": "Company=Microsoft"
+  },
+  {
+    "src": "logo72.png",
+    "alt": "Company=Miro"
+  },
+  {
+    "src": "logo73.png",
+    "alt": "Company=Monday.com"
+  },
+  {
+    "src": "logo74.png",
+    "alt": "Company=Monzo"
+  },
+  {
+    "src": "logo75.png",
+    "alt": "Company=Notion"
+  },
+  {
+    "src": "logo76.png",
+    "alt": "Company=Opendoor"
+  },
+  {
+    "src": "logo77.png",
+    "alt": "Company=Outreach"
+  },
+  {
+    "src": "logo78.png",
+    "alt": "Company=Pendo"
+  },
+  {
+    "src": "logo79.png",
+    "alt": "Company=Pipedrive"
+  },
+  {
+    "src": "logo80.png",
+    "alt": "Company=Plaid"
+  },
+  {
+    "src": "logo81.png",
+    "alt": "Company=Postman"
+  },
+  {
+    "src": "logo82.png",
+    "alt": "Company=Productboard"
+  },
+  {
+    "src": "logo83.png",
+    "alt": "Company=Razorpay"
+  },
+  {
+    "src": "logo84.png",
+    "alt": "Company=Rippling"
+  },
+  {
+    "src": "logo85.png",
+    "alt": "Company=Segment"
+  },
+  {
+    "src": "logo86.png",
+    "alt": "Company=Sonos"
+  },
+  {
+    "src": "logo87.png",
+    "alt": "Company=SpaceX"
+  },
+  {
+    "src": "logo88.png",
+    "alt": "Company=Splunk"
+  },
+  {
+    "src": "logo89.png",
+    "alt": "Company=Spotify"
+  },
+  {
+    "src": "logo90.png",
+    "alt": "Company=Square"
+  },
+  {
+    "src": "logo91.png",
+    "alt": "Company=Squarespace"
+  },
+  {
+    "src": "logo92.png",
+    "alt": "Company=Tesla"
+  },
+  {
+    "src": "logo93.png",
+    "alt": "Company=Tinder"
+  },
+  {
+    "src": "logo94.png",
+    "alt": "Company=Toggle"
+  },
+  {
+    "src": "logo95.png",
+    "alt": "Company=Treehouse"
+  },
+  {
+    "src": "logo96.png",
+    "alt": "Company=Trello"
+  },
+  {
+    "src": "logo97.png",
+    "alt": "Company=Trustpilot"
+  },
+  {
+    "src": "logo98.png",
+    "alt": "Company=Twitch"
+  },
+  {
+    "src": "logo99.png",
+    "alt": "Company=Uber"
+  },
+  {
+    "src": "logo100.png",
+    "alt": "Company=Wealthsimple"
+  },
+  {
+    "src": "logo101.png",
+    "alt": "Company=Webflow"
+  },
+  {
+    "src": "logo102.png",
+    "alt": "Company=Whatsapp"
+  },
+  {
+    "src": "logo103.png",
+    "alt": "Company=Xero"
+  },
+  {
+    "src": "logo104.png",
+    "alt": "Company=YouTube"
+  },
+  {
+    "src": "logo105.png",
+    "alt": "Company=Zapier"
+  },
+  {
+    "src": "logo106.png",
+    "alt": "Company=Zoom"
+  }
+]
