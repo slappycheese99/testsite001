@@ -1,0 +1,1675 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>start with create-tailwind-app</title>
+    <link rel="stylesheet" href="./assets/css/build/tailwind.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Apply z-index to floating icons to keep them behind other content but above the background */
+      .floating-icon {
+        z-index: 10; /* Lower z-index than content, higher than background */
+        position: absolute; /* Ensure z-index applies */
+      }
+      /* Ensure navigation and main content are above the floating icons */
+      nav {
+        position: relative; /* Ensure z-index applies */
+        z-index: 20; /* Higher z-index than floating icons */
+      }
+      /* Specific z-index for mobile hero section elements */
+      .lg\:hidden > .relative:first-child {
+        /* This targets the div containing floating icons in mobile view */
+        z-index: 10; /* Keep icons behind other content */
+      }
+      .lg\:hidden > .relative:nth-child(2) {
+        /* This targets the main content div in mobile view */
+        position: relative; /* Ensure z-index applies */
+        z-index: 20; /* Keep content above icons */
+      }
+      /* Specific z-index for desktop hero section elements */
+      .lg\:block > .relative.container {
+        /* This targets the desktop content container */
+        position: relative; /* Ensure z-index applies */
+        z-index: 20; /* Keep content above icons */
+      }
+      .lg\:block .floating-icon {
+        z-index: 10; /* Lower z-index for desktop floating icons */
+      }
+
+      /* Styles for FAQ section */
+      .faq-section {
+        background-color: #ffffff;
+        padding: 80px 20px;
+        max-width: 1440px;
+        margin: auto;
+      }
+
+      .faq-section .container {
+        max-width: 960px;
+        margin: 0 auto;
+      }
+
+      .faq-section .section-header {
+        text-align: center;
+        margin-bottom: 48px;
+      }
+
+      .faq-section .section-title {
+        font-size: 36px;
+        font-weight: 800;
+        color: #0a0d12;
+        margin-bottom: 16px;
+      }
+
+      .faq-section .section-description {
+        font-size: 18px;
+        font-weight: 400;
+        color: #252b37;
+        line-height: 28px;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      .faq-section .faq-container {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .faq-section .faq-item {
+        background-color: #ffffff;
+        border: 1px solid #e9eaeb;
+        border-radius: 16px;
+        box-shadow: 0px 4px 16px rgba(176, 176, 176, 0.25);
+        overflow: hidden;
+      }
+
+      .faq-section .faq-question {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 24px;
+        cursor: pointer;
+      }
+
+      .faq-section .faq-question h2 {
+        font-size: 18px;
+        font-weight: 600;
+        color: #0a0d12;
+        margin: 0;
+      }
+
+      .faq-section .faq-answer {
+        padding: 0 24px 24px 24px;
+        color: #414651;
+        font-size: 16px;
+        line-height: 28px;
+      }
+
+      .faq-section .icon {
+        width: 24px;
+        height: 24px;
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+
+      .faq-section .plus-icon {
+        background-image: url('./assets/logo/plus-icon.png');
+      }
+
+      .faq-section .minus-icon {
+        background-image: url('./assets/logo/minus-icon.png');
+      }
+
+      /* Responsive adjustments for FAQ section */
+      @media (max-width: 768px) {
+        .faq-section {
+          padding: 60px 15px;
+        }
+
+        .faq-section .section-title {
+          font-size: 28px;
+        }
+
+        .faq-section .section-description {
+          font-size: 16px;
+        }
+
+        .faq-section .faq-question h2 {
+          font-size: 16px;
+        }
+
+        .faq-section .faq-answer {
+          font-size: 14px;
+        }
+      }
+
+      /* Styles for logo carousel */
+      .logo-item {
+        flex: 0 0 120px; /* Fixed width, no shrinking/growing */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 16px; /* Adjust padding as needed */
+      }
+      .logo-item img {
+        max-width: 100%;
+        height: auto;
+      }
+      #logo-carousel {
+        white-space: nowrap; /* Keep all logos in a single row */
+        will-change: transform; /* Optimize for animation */
+      }
+
+      /* Responsive adjustment for logo items on smaller screens */
+      @media (max-width: 767px) {
+        .logo-item {
+          flex: 0 0 100px; /* Smaller fixed width for mobile */
+          padding: 0 8px; /* Adjusted padding for mobile */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section
+      class="relative min-h-[1024px] text-white overflow-x-hidden bg-cover bg-center bg-no-repeat max-w-[1440px] mx-auto"
+      style="background-image: url('/assets/images/background-xl.png')"
+    >
+      <div
+        class="lg:hidden relative bg-cover bg-center h-[852px] w-full max-w-[393px] mx-auto pl-[20px] pt-[20px] pr-[20px]"
+      >
+        <!--mobile navbar-->
+        <nav
+          class="flex justify-between border rounded-full border-neutral-50 border-opacity-40 pl-[24px] pr-[24px] py-3"
+        >
+          <div id="logo" class="flex items-center gap-[5px]">
+            <img
+              src="./assets/logo/logo-symbol.png"
+              alt="logo"
+              width="16"
+              height="18"
+            />
+            <p class="text-white">Search</p>
+          </div>
+          <div id="button" class="flex items-center">
+            <img
+              src="./assets/logo/icon-menu.png"
+              alt="button"
+              width="24"
+              height="24"
+            />
+          </div>
+        </nav>
+
+        <div class="relative">
+          <div class="floating-icon pl-[24px] pt-[47px]">
+            <img
+              src="./assets/logo/icon-tailwind.png"
+              alt="Tailwind"
+              width="40"
+              height="40"
+            />
+          </div>
+          <div class="floating-icon right-[19px] top-6">
+            <img
+              src="./assets/logo/icon-figma.png"
+              alt="Figma"
+              width="52"
+              height="52"
+            />
+          </div>
+          <div class="floating-icon left-[24px] top-[607px]">
+            <img
+              src="./assets/logo/icon-react.png"
+              alt="React"
+              width="55"
+              height="55"
+            />
+          </div>
+          <div class="floating-icon left-[181px] top-[584px]">
+            <img
+              src="./assets/logo/icon-html.png"
+              alt="HTML"
+              width="63"
+              height="63"
+            />
+          </div>
+          <div class="floating-icon right-[22px] top-[667px]">
+            <img
+              src="./assets/logo/icon-css.png"
+              alt="CSS"
+              width="46"
+              height="46"
+            />
+          </div>
+        </div>
+
+        <div class="relative w-full h-full top-[60px]">
+          <div class="mx-auto mt-20 mb-8 flex justify-center">
+            <div class="relative">
+              <div
+                class="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 to-transparent"
+              ></div>
+              <div
+                class="box-border flex flex-row items-center py-1 px-4 gap-1.5 w-56 h-8 bg-[#0A0D12] rounded-full relative m-[1px]"
+              >
+                <div class="relative w-4 h-4 flex-none">
+                  <img
+                    src="./assets/logo/icon-trophy.png"
+                    alt="Trophy"
+                    class="absolute"
+                  />
+                </div>
+                <span
+                  class="font-normal text-xs leading-6 text-center text-[#FDFDFD] w-[170px] h-6 flex-none font-['Sora']"
+                  >Top Bootcamp International</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center mt-4 px-5">
+            <h1 class="text-white text-4xl font-bold leading-tight">
+              Become a
+              <span class="text-blue-400"
+                >Expert<br />Frontend<br />Developer</span
+              >
+              Who<br />Gets Hired!
+            </h1>
+          </div>
+
+          <div class="text-center mt-5 px-15">
+            <p class="text-white text-sm">
+              Learn real skills. Build real projects. Get real<br />results with
+              expert mentorship.
+            </p>
+          </div>
+
+          <div class="mt-8 text-center px-5">
+            <button
+              class="bg-[#0093DD] text-white font-medium py-3 rounded-full w-full"
+            >
+              Join Now
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="hidden lg:block bg-gradient-desktop min-h-screen relative overflow-hidden"
+      >
+        <div class="container mx-auto px-4 py-6">
+          <!--desktop navbar-->
+          <nav
+            class="flex justify-between items-center border rounded-full border-neutral-50 border-opacity-40 pl-[24px] pr-[24px] py-2"
+          >
+            <div class="flex items-center">
+              <div class="mr-10 flex items-center">
+                <img
+                  src="./assets/logo/logo-symbol.png"
+                  alt="logo"
+                  width="24"
+                  height="24"
+                  class="mr-2"
+                />
+                <span class="font-bold text-l">Your Logo</span>
+              </div>
+              <ul class="flex space-x-10">
+                <li>
+                  <a href="#" class="hover:text-blue-400 transition"
+                    >Why Choose Us</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="hover:text-blue-400 transition">Module</a>
+                </li>
+                <li>
+                  <a href="#" class="hover:text-blue-400 transition"
+                    >Testimony</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="hover:text-blue-400 transition pr-6"
+                    >FAQ</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <button
+              class="bg-[#0093DD] text-white font-medium py-2 px-8 rounded-full hover:bg-blue-500 transition"
+            >
+              Join Now
+            </button>
+          </nav>
+        </div>
+
+        <div class="relative container mx-auto h-screen">
+          <div class="floating-icon left-[279px] top-[91px]" data-speed="slow">
+            <img
+              src="./assets/logo/icon-tailwind.png"
+              alt="Tailwind"
+              width="80"
+              height="80"
+            />
+          </div>
+          <div
+            class="floating-icon right-[232px] top-[110px]"
+            data-speed="medium"
+          >
+            <img
+              src="./assets/logo/icon-figma.png"
+              alt="Figma"
+              width="73.9"
+              height="73.9"
+            />
+          </div>
+          <div
+            class="floating-icon left-[294px] bottom-[220px]"
+            data-speed="fast"
+          >
+            <img
+              src="./assets/logo/icon-react.png"
+              alt="React"
+              width="100"
+              height="100"
+            />
+          </div>
+          <div
+            class="floating-icon left-[147px] top-[374px] absolute"
+            data-speed="medium"
+          >
+            <img
+              src="./assets/logo/icon-js.png"
+              alt="JavaScript"
+              width="83"
+              height="83"
+            />
+          </div>
+          <div
+            class="floating-icon right-[193px] bottom-[380px]"
+            data-speed="slow"
+          >
+            <img
+              src="./assets/logo/icon-html.png"
+              alt="HTML"
+              width="82"
+              height="82"
+            />
+          </div>
+          <div
+            class="floating-icon right-[432px] bottom-[244px]"
+            data-speed="fast"
+          >
+            <img
+              src="./assets/logo/icon-css.png"
+              alt="CSS"
+              width="65"
+              height="65"
+            />
+          </div>
+
+          <div
+            class="absolute top-[24rem] left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-full max-w-4xl"
+          >
+            <div class="mx-auto mb-8 flex justify-center">
+              <div class="relative">
+                <div
+                  class="absolute inset-0 rounded-full bg-gradient-to-r from-transparent to-[#0093DD]"
+                ></div>
+                <div
+                  class="box-border flex flex-row items-center py-2 px-4 gap-2 w-64 bg-[#0A0D12] rounded-full relative m-[1px]"
+                >
+                  <div class="relative w-5 h-5 flex-none">
+                    <img
+                      src="./assets/logo/icon-trophy.png"
+                      alt="Trophy"
+                      class="absolute"
+                    />
+                  </div>
+                  <span
+                    class="font-normal text-sm leading-6 text-center text-[#FDFDFD] flex-none font-['Sora']"
+                    >Top Bootcamp International</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <h1 class="text-white text-6xl font-bold leading-tight">
+              Become a
+              <span class="text-blue-400">Expert Frontend</span><br />
+              <span class="text-blue-400">Developer</span>
+              <span class="text-white"> Who Gets Hired!</span>
+            </h1>
+
+            <p class="text-white text-xl mt-8 mb-10">
+              Learn real skills. Build real projects. Get real results with
+              expert mentorship.
+            </p>
+
+            <button
+              class="bg-[#0093DD] text-white font-medium py-4 px-16 rounded-full text-lg hover:bg-blue-500 transition"
+            >
+              Join Now
+            </button>
+          </div>
+        </div>
+
+        <div class="absolute inset-0 z-0 overflow-hidden">
+          <div
+            class="absolute w-2 h-2 rounded-full bg-white opacity-20"
+            style="top: 12%; left: 15%"
+          ></div>
+          <div
+            class="absolute w-1 h-1 rounded-full bg-white opacity-30"
+            style="top: 25%; left: 30%"
+          ></div>
+          <div
+            class="absolute w-2 h-2 rounded-full bg-white opacity-15"
+            style="top: 45%; left: 10%"
+          ></div>
+          <div
+            class="absolute w-1 h-1 rounded-full bg-white opacity-25"
+            style="top: 35%; left: 60%"
+          ></div>
+          <div
+            class="absolute w-2 h-2 rounded-full bg-white opacity-20"
+            style="top: 65%; left: 75%"
+          ></div>
+          <div
+            class="absolute w-1 h-1 rounded-full bg-white opacity-30"
+            style="top: 80%; left: 20%"
+          ></div>
+          <div
+            class="absolute w-2 h-2 rounded-full bg-white opacity-15"
+            style="top: 75%; left: 50%"
+          ></div>
+          <div
+            class="absolute w-1 h-1 rounded-full bg-white opacity-25"
+            style="top: 18%; left: 80%"
+          ></div>
+          <div
+            class="absolute w-2 h-2 rounded-full bg-white opacity-20"
+            style="top: 90%; left: 88%"
+          ></div>
+          <div
+            class="absolute w-1 h-1 rounded-full bg-white opacity-30"
+            style="top: 5%; left: 40%"
+          ></div>
+        </div>
+      </div>
+    </section>
+    <!---script for floating icons-->
+    <script>
+      //Animation for floating icons
+      document.addEventListener('DOMContentLoaded', function () {
+        const floatingIcons = document.querySelectorAll('.floating-icon');
+
+        //Define animation speeds and corresponding intervals
+        //Randomize Floating Icons Movement Setting
+        const speedSettings = {
+          //smooth move
+          slow: { interval: 4000, duration: 3500, movement: 25 },
+          medium: { interval: 3000, duration: 2500, movement: 30 },
+          fast: { interval: 2000, duration: 1500, movement: 35 },
+        };
+
+        floatingIcons.forEach((icon) => {
+          // Only apply floating animation for desktop view
+          if (window.innerWidth >= 1024) {
+            const speed = icon.dataset.speed || 'medium';
+            const { interval, duration, movement } = speedSettings[speed];
+
+            // Function to animate a single icon
+            function animateIcon() {
+              const xMovement = Math.random() * movement * 2 - movement; // -movement to +movement
+              const yMovement = Math.random() * movement * 2 - movement; // -movement to +movement
+
+              icon.style.transition = `transform ${
+                duration / 1000
+              }s ease-in-out`;
+              icon.style.transform = `translate(${xMovement}px, ${yMovement}px)`;
+            }
+
+            // initial animation move right away
+            animateIcon();
+
+            // Set interval to continuously animate the icon
+            setInterval(animateIcon, interval);
+          }
+        });
+      });
+    </script>
+    <!--script for mobile menu-->
+    <script>
+      //Menu button
+      document.addEventListener('DOMContentLoaded', function () {
+        const menuButton = document.querySelector('#button');
+
+        //Mobile menu roll down
+        const mobileMenuContainer = document.createElement('div');
+        mobileMenuContainer.id = 'mobileMenu';
+        mobileMenuContainer.className =
+          'fixed inset-0 bg-black bg-opacity-90 z-50 transform translate-x-full transition-transform duration-300 ease-in-out';
+
+        //Menu content
+        const menuContent = document.createElement('div');
+        menuContent.className = 'flex flex-col h-full pt-6 px-8';
+
+        //Logo header at the top of the slide-out menu
+        const logoHeader = document.createElement('div');
+        logoHeader.className =
+          'flex items-center justify-between py-4 px-4 mb-8 rounded-full border border-neutral-50 border-opacity-40';
+
+        //Logo container with logo and text
+        const logoContainer = document.createElement('div');
+        logoContainer.className = 'flex items-center gap-2';
+
+        //Logo image
+        const logoImg = document.createElement('img');
+        logoImg.src = './assets/logo/logo-symbol.png';
+        logoImg.alt = 'Your Logo';
+        logoImg.width = 24;
+        logoImg.height = 24;
+
+        //Logo text
+        const logoText = document.createElement('span');
+        logoText.className = 'text-white';
+        logoText.textContent = 'Your Logo';
+
+        //Assemble logo container
+        logoContainer.appendChild(logoImg);
+        logoContainer.appendChild(logoText);
+
+        //Close icon header
+        const closeIcon = document.createElement('span');
+        closeIcon.innerHTML =
+          '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+        closeIcon.className = 'text-white cursor-pointer';
+
+        //Assemble logo header
+        logoHeader.appendChild(logoContainer);
+        logoHeader.appendChild(closeIcon);
+
+        //Logo header menu content
+        menuContent.appendChild(logoHeader);
+
+        //Menu items matching the desktop navigation
+        const menuItems = [
+          { text: 'Why Choose Us', href: '#' },
+          { text: 'Module', href: '#' },
+          { text: 'Testimony', href: '#' },
+          { text: 'FAQ', href: '#' },
+        ];
+
+        //Menu links
+        menuItems.forEach((item) => {
+          const link = document.createElement('a');
+          link.href = item.href;
+          link.className = 'text-white text-xl py-4 border-b border-gray-700';
+          link.textContent = item.text;
+          menuContent.appendChild(link);
+        });
+
+        //Join Now button
+        const joinButton = document.createElement('button');
+        joinButton.className =
+          'mt-8 bg-[#0093DD] text-white font-medium py-3 rounded-full w-full';
+        joinButton.textContent = 'Join Now';
+        menuContent.appendChild(joinButton);
+
+        //Menu content
+        mobileMenuContainer.appendChild(menuContent);
+
+        //Add the menu container to the body
+        document.body.appendChild(mobileMenuContainer);
+
+        //Toggle the menu when the button is clicked
+        menuButton.addEventListener('click', function () {
+          mobileMenuContainer.classList.toggle('translate-x-full');
+          mobileMenuContainer.classList.toggle('translate-x-0');
+        });
+
+        //Close the menu when the close button is clicked
+        closeIcon.addEventListener('click', function () {
+          mobileMenuContainer.classList.add('translate-x-full');
+          mobileMenuContainer.classList.remove('translate-x-0');
+        });
+
+        //Close the menu when a link is clicked
+        const menuLinks = mobileMenuContainer.querySelectorAll('a');
+        menuLinks.forEach((link) => {
+          link.addEventListener('click', function () {
+            mobileMenuContainer.classList.add('translate-x-full');
+            mobileMenuContainer.classList.remove('translate-x-0');
+          });
+        });
+      });
+    </script>
+    <!--section trusted-->
+    <section
+      class="relative bg-white py-12 md:py-16 lg:py-20 max-w-[1440px] mx-auto"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h2
+            class="text-xl font-extrabold text-[#0A0D12] sm:text-2xl md:text-3xl lg:text-4xl"
+          >
+            Trusted by 1,000+ Hiring Partners Worldwide
+          </h2>
+          <p
+            class="mt-3 max-w-2xl mx-auto text-sm md:text-base text-[#252B37] sm:mt-4"
+          >
+            From global tech companies to fast-growing startups.
+          </p>
+        </div>
+        <!--carousel container-->
+        <div
+          id="logo-carousel-container"
+          class="flex justify-center items-center mt-10 md:mt-12 lg:mt-16 overflow-hidden"
+        >
+          <div
+            id="logo-carousel"
+            class="flex flex-nowrap items-center h-full"
+          ></div>
+        </div>
+      </div>
+    </section>
+    <!--script for carousel-->
+    <script>
+      // JavaScript for the auto-sliding logo carousel
+      document.addEventListener('DOMContentLoaded', function () {
+        const logoCarouselContainer = document.getElementById(
+          'logo-carousel-container'
+        );
+        const logoCarousel = document.getElementById('logo-carousel');
+
+        // Initial placeholder logos. These will be replaced by fetched data.
+        let allLogos = []; // Start with an empty array, as logos will be fetched.
+
+        let currentOffset = 0;
+        let animationFrameId;
+        // Carousel Speed Control
+        // This variable regulates the speed of the carousel.
+        // A higher value means faster movement per animation frame.
+        const slideSpeed = 5.0; // Adjusted for faster speed
+
+        // Base path for the main sponsor logos folder (where logoX.png and logoname.json are)
+        const mainLogoFolder = '/assets/images/sponsor-logo/';
+
+        // Function to create a logo element
+        // Creates a new div element for a logo item with appropriate styling.
+        function createLogoElement(logo) {
+          const div = document.createElement('div');
+          div.className = 'logo-item h-8 lg:h-10'; // Applied for carousel item styling
+          const img = document.createElement('img');
+          // logo.src now contains the full relative path
+          img.src = logo.src;
+          img.alt = logo.alt;
+          img.className = 'h-full object-contain'; // Ensures image fits within its container
+          // Add error handling for image loading
+          img.onerror = function () {
+            this.src = 'https://placehold.co/120x40/FF0000/FFFFFF?text=Error'; // Fallback image on error
+            this.alt = 'Error loading image';
+            console.error(`Failed to load image: ${logo.src}`);
+          };
+          div.appendChild(img);
+          return div;
+        }
+
+        // Function to initialize or reset the carousel
+        // Populates the carousel with logo elements and calculates the width for seamless looping.
+        function initCarousel() {
+          logoCarousel.innerHTML = ''; // Clear existing logos to re-populate
+
+          // Duplicate the `allLogos` array for seamless looping.
+          // By having two sets, when the first set slides out of view, the second set is already in place,
+          // allowing for an instant reset of the transform without a visible jump.
+          const logosToDisplay = [...allLogos, ...allLogos];
+
+          logosToDisplay.forEach((logo) => {
+            logoCarousel.appendChild(createLogoElement(logo));
+          });
+
+          // Calculate the total width of one complete set of unique logos.
+          let singleLogoSetWidth = 0;
+          if (allLogos.length > 0 && logoCarousel.children.length > 0) {
+            const firstLogoItem = logoCarousel.children[0];
+            const computedStyle = window.getComputedStyle(firstLogoItem);
+            const itemWidth = firstLogoItem.offsetWidth; // Get the computed width of a logo item
+            const itemMarginRight = parseFloat(computedStyle.marginRight) || 0; // Get any right margin
+            singleLogoSetWidth =
+              allLogos.length * (itemWidth + itemMarginRight);
+          }
+          logoCarousel.dataset.singleLogoSetWidth = singleLogoSetWidth; // Store this width in a data attribute
+
+          // Initial offset for left-to-right seamless loop.
+          // We start with the carousel shifted left by one full set of logos,
+          // so the second set is visible at the start.
+          currentOffset = -singleLogoSetWidth;
+          logoCarousel.style.transform = `translateX(${currentOffset}px)`; // Apply initial transform
+
+          // Log the calculated singleLogoSetWidth to the console for debugging.
+          console.log(
+            'Carousel initialized. Single logo set width:',
+            singleLogoSetWidth
+          );
+        }
+
+        // Function to animate the carousel frame by frame (Left-to-Right Seamless Loop)
+        // Continuously updates the carousel's position to create the sliding effect.
+        function animateCarousel() {
+          // Increment the offset to move the carousel from left to right.
+          // This is where the speed and direction of the carousel are directly controlled.
+          currentOffset += slideSpeed;
+
+          const singleLogoSetWidth = parseFloat(
+            logoCarousel.dataset.singleLogoSetWidth
+          );
+
+          // Adjusted condition for left-to-right seamless loop.
+          // When the currentOffset becomes 0 or positive, it means the second set of logos
+          // has fully scrolled into view, and we can reset the position.
+          if (currentOffset >= 0) {
+            currentOffset -= singleLogoSetWidth; // Reset by shifting back one full set
+          }
+
+          // Apply the CSS transform to visually move the carousel container.
+          // The value is positive because we are translating right.
+          logoCarousel.style.transform = `translateX(${currentOffset}px)`;
+
+          // Log currentOffset and slideSpeed to the console for debugging.
+          console.log(
+            'Current Offset:',
+            currentOffset,
+            'Slide Speed:',
+            slideSpeed
+          );
+
+          // Request the next animation frame to continue the animation loop.
+          animationFrameId = requestAnimationFrame(animateCarousel);
+        }
+
+        // Function to start the carousel animation
+        // Initializes the carousel and begins the animation loop.
+        function startCarousel() {
+          initCarousel(); // Initialize the carousel setup
+          cancelAnimationFrame(animationFrameId); // Cancel any previous animation frame
+          animationFrameId = requestAnimationFrame(animateCarousel); // Start the animation loop
+        }
+
+        // Function to stop the carousel animation
+        // Stops the animation loop.
+        function stopCarousel() {
+          cancelAnimationFrame(animationFrameId); // Stop the animation frame loop
+        }
+
+        // Async function to fetch logos from JSON
+        async function fetchLogosAndStartCarousel() {
+          try {
+            // Fetch the logoname.json file from the main sponsor-logo folder
+            const response = await fetch(`${mainLogoFolder}logoname.json`);
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const rawJsonLogos = await response.json();
+            // Prepend the mainLogoFolder path to each src from the JSON
+            allLogos = rawJsonLogos.map((logo) => ({
+              src: `${mainLogoFolder}${logo.src}`,
+              alt: logo.alt,
+            }));
+            console.log('Logos loaded from JSON:', allLogos);
+          } catch (error) {
+            console.error('Could not fetch logos from logoname.json:', error);
+            // Fallback to placeholder logos if fetching fails
+            allLogos = [
+              {
+                src: 'https://placehold.co/120x40/E0E0E0/333333?text=Error',
+                alt: 'Error Loading',
+              },
+            ];
+            console.log('Falling back to error placeholder.');
+          } finally {
+            startCarousel(); // Start the carousel after all logos are loaded/combined
+          }
+        }
+
+        // Initial call to fetch logos and start carousel
+        fetchLogosAndStartCarousel();
+
+        // Event listener for window resize
+        // Handles responsiveness by stopping and restarting the carousel animation
+        // to re-evaluate its state based on the new window size.
+        window.addEventListener('resize', () => {
+          stopCarousel();
+          startCarousel();
+        });
+      });
+    </script>
+    <!--section coding journey-->
+    <section
+      class="min-h-screen bg-white w-full py-12 md:py-20 max-w-[1440px] mx-auto"
+    >
+      <div class="container mx-auto px-5 md:px-8 lg:px-12 xl:px-6 max-w-7xl">
+        <div class="grid md:grid-cols-2 lg:grid-cols-12 gap-2 lg:gap-8">
+          <div class="lg:col-span-12 flex flex-col items-center gap-6 mb-8">
+            <h1
+              class="text-2xl md:text-4xl font-extrabold text-center text-[#0A0D12] leading-tight md:leading-snug"
+            >
+              Your Coding Journey Simplified
+            </h1>
+            <p
+              class="text-sm md:text-lg text-center text-[#252B37] leading-7 md:max-w-2xl"
+            >
+              Everything you need to become a job-ready developer expert
+              guidance, hands-on projects, and real career results
+            </p>
+          </div>
+
+          <div
+            class="lg:col-span-7 bg-white rounded-2xl border border-[#e9eaeb] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] p-6 h-full min-h-[360px] max-h-[400px]"
+          >
+            <div class="flex flex-col h-full">
+              <div class="flex flex-col items-start gap-2 mb-6">
+                <h2
+                  class="text-lg md:text-2xl font-bold text-[#0A0D12] leading-tight"
+                >
+                  Master Coding, Land Your Dream Job!
+                </h2>
+                <p class="text-sm md:text-base text-[#0A0D12] leading-7 pb-8">
+                  Learn job-ready skills with real-world projects and expert
+                  mentorship
+                </p>
+              </div>
+              <div class="relative mt-auto object-bottom">
+                <img
+                  src="./assets/logo/orbit.png"
+                  alt="orbit"
+                  class="object-bottom"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="lg:col-span-5 bg-white rounded-2xl border border-[#e9eaeb] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] p-6 h-full min-h-[360px] max-h-[400px]"
+          >
+            <div class="flex flex-col h-full">
+              <div class="flex flex-col gap-4 mb-6">
+                <div class="flex flex-col gap-2">
+                  <h2
+                    class="text-lg md:text-2xl font-bold text-[#0A0D12] leading-tight"
+                  >
+                    Proven Results, Real Impact
+                  </h2>
+                  <p class="text-sm md:text-base text-[#0A0D12] leading-7">
+                    Turn skills into careers with top-tier training & expert
+                    guidance
+                  </p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <p
+                      class="text-xl md:text-2xl font-bold text-[#0A0D12] leading-tight"
+                    >
+                      90%+
+                    </p>
+                    <p class="text-sm md:text-base text-[#0A0D12] leading-7">
+                      Job Placement
+                    </p>
+                  </div>
+                  <div>
+                    <p
+                      class="text-xl md:text-2xl font-bold text-[#0A0D12] leading-tight"
+                    >
+                      50,000+
+                    </p>
+                    <p class="text-sm md:text-base text-[#0A0D12] leading-7">
+                      Graduates
+                    </p>
+                  </div>
+                  <div>
+                    <p
+                      class="text-xl md:text-2xl font-bold text-[#0A0D12] leading-tight"
+                    >
+                      1,000+
+                    </p>
+                    <p class="text-sm md:text-base text-[#0A0D12] leading-7">
+                      Hiring partners
+                    </p>
+                  </div>
+                  <div>
+                    <p
+                      class="text-xl md:text-2xl font-bold text-[#0A0D12] leading-tight"
+                    >
+                      Hired
+                    </p>
+                    <p class="text-sm md:text-base text-[#0A0D12] leading-7">
+                      by top tech companies
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-auto flex justify-between bottom-column">
+                <div class="w-[98px] h-[32px]">
+                  <img
+                    src="./assets/images/Image-proven.png"
+                    alt="icon-proven"
+                    class="w-full h-full"
+                  />
+                </div>
+                <div class="w-24 md:w-32">
+                  <img
+                    src="./assets/images/globe-bg.png"
+                    alt="globe-bg"
+                    class="w-full h-full"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lg:col-span-12 grid lg:grid-cols-3 gap-6 lg:gap-8">
+            <div
+              class="bg-white rounded-2xl border border-[#e9eaeb] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] p-6 min-h-[319px] max-h-[400px]"
+            >
+              <div class="flex flex-col gap-4 h-full">
+                <div class="flex flex-col gap-2">
+                  <h2
+                    class="text-lg md:text-2xl font-bold text-[#0A0D12] leading-tight"
+                  >
+                    Choose Your Path, Build Your Future
+                  </h2>
+                  <p class="text-sm md:text-base text-[#0A0D12] leading-7">
+                    Master frontend development with cutting-edge skills and
+                    best practices.
+                  </p>
+                </div>
+
+                <div class="grid grid-cols-3 gap-2 mt-[20px]">
+                  <div class="flex items-center justify-center">
+                    <img
+                      src="./assets/images/js-image.png"
+                      alt="js-image"
+                      class="rounded-lg"
+                      style="height: 79px; width: 111px"
+                    />
+                  </div>
+                  <div class="flex items-center justify-center">
+                    <img
+                      src="./assets/images/react-image.png"
+                      alt="react-image"
+                      class="rounded-lg"
+                      style="height: 79px; width: 111px"
+                    />
+                  </div>
+                  <div class="flex items-center justify-center">
+                    <img
+                      src="./assets/images/css-image.png"
+                      alt="css-image"
+                      class="rounded-lg"
+                      style="height: 79px; width: 111px"
+                    />
+                  </div>
+                  <div class="flex items-center justify-center">
+                    <img
+                      src="./assets/images/html-image.png"
+                      alt="html-image"
+                      class="rounded-lg"
+                      style="height: 79px; width: 111px"
+                    />
+                  </div>
+                  <div class="flex items-center justify-center">
+                    <img
+                      src="./assets/images/tailwind-image.png"
+                      alt="tailwind-image"
+                      class="rounded-lg"
+                      style="height: 79px; width: 111px"
+                    />
+                  </div>
+                  <div class="flex items-center justify-center">
+                    <img
+                      src="./assets/images/figma-image.png"
+                      alt="figma-image"
+                      class="rounded-lg"
+                      style="height: 79px; width: 111px"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-white rounded-2xl border border-[#e9eaeb] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] p-6 min-h-[390px] max-h-[400px]"
+            >
+              <div class="flex flex-col gap-6 h-full">
+                <div class="flex flex-col gap-2">
+                  <h2
+                    class="text-lg md:text-2xl font-bold text-[#0A0D12] leading-tight"
+                  >
+                    Everything You Need to Succeed
+                  </h2>
+                  <p class="text-sm md:text-base text-[#0A0D12] leading-7">
+                    Live classes, mentorship, hands-on projects, and career
+                    support
+                  </p>
+                </div>
+
+                <div class="relative mt-auto">
+                  <div
+                    class="w-full aspect-video bg-gray-200 rounded-lg overflow-hidden"
+                  >
+                    <img
+                      src="./assets/images/video-image.png"
+                      alt="video-image"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div
+                    class="absolute inset-0 flex items-center justify-center"
+                  >
+                    <div
+                      class="w-12 h-12 md:w-16 md:h-16 backdrop-blur rounded-full flex items-center justify-center bg-white/30"
+                    >
+                      <img
+                        src="./assets/logo/Play-icon.png"
+                        alt="Play-icon"
+                        class="w-6 h-6 md:w-8 md:h-8"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-[#0093DD] rounded-2xl shadow-[0px_4px_4px_rgba(0,0,0,0.25)] p-6 min-h-[319px] max-h-[400px]"
+            >
+              <div class="flex flex-col h-full justify-between">
+                <div>
+                  <div
+                    class="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-6"
+                  >
+                    <img
+                      src="./assets/logo/blue-icon.png"
+                      alt="blue-icon"
+                      class="w-8 h-8"
+                    />
+                  </div>
+
+                  <div class="flex flex-col gap-2">
+                    <h2 class="text-2xl font-bold text-white leading-tight">
+                      Your Future Starts Here
+                    </h2>
+                    <p class="text-sm md:text-base text-white leading-7">
+                      Enroll today and become a Frontend Developer in just
+                      months!
+                    </p>
+                  </div>
+                </div>
+
+                <button
+                  class="w-full py-3 bg-white rounded-full text-sm md:text-base font-semibold text-[#0A0D12] hover:bg-gray-100 transition-colors mt-6"
+                >
+                  Join Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--section learning frontend-->
+    <section class="w-full flex justify-center max-w-[1440px] mx-auto">
+      <div
+        class="flex flex-col items-center px-5 py-10 gap-8 w-full max-w-[393px] md:max-w-4xl lg:max-w-[1440px] min-h-screen bg-gradient-to-b from-transparent via-transparent to-[rgba(0,147,221,0.2)] pt-20"
+      >
+        <div class="flex flex-col items-center gap-3 w-full md:max-w-2xl">
+          <h1
+            class="text-2xl md:text-4xl font-extrabold text-center text-[#0A0D12]"
+          >
+            Learning Frontend Developer Tools
+          </h1>
+          <p
+            class="text-sm md:text-base font-normal text-center text-[#252B37] leading-6"
+          >
+            Mastering Essential Tools for Efficient Frontend Development
+          </p>
+        </div>
+
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full"
+        >
+          <div
+            class="flex flex-col w-full bg-white border-card border-[#E9EAEB] rounded-2xl shadow-[0_4px_16px_rgba(176,176,176,0.25)] overflow-hidden"
+          >
+            <div class="w-full h-[297px] flex items-center justify-center">
+              <img
+                src="./assets/images/html-image.png"
+                alt="HTML"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-6 flex flex-col gap-4">
+              <div class="flex flex-col gap-2">
+                <h3 class="text-lg font-semibold text-[#0A0D12]">HTML</h3>
+                <p class="text-sm font-normal text-[#414651] leading-6">
+                  The backbone of web pages, structuring content for browsers
+                </p>
+              </div>
+              <button
+                class="w-full py-3 px-6 bg-[#0093DD] rounded-full hover:bg-[#0078b4] transition-colors"
+              >
+                <span class="text-sm font-semibold text-white">Learn More</span>
+              </button>
+            </div>
+          </div>
+
+          <div
+            class="flex flex-col w-full bg-white border-card border-[#E9EAEB] rounded-2xl shadow-[0_4px_16px_rgba(176,176,176,0.25)] overflow-hidden"
+          >
+            <div class="w-full h-[297px] flex items-center justify-center">
+              <img
+                src="./assets/images/css-image.png"
+                alt="CSS"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-6 flex flex-col gap-4">
+              <div class="flex flex-col gap-2">
+                <h3 class="text-lg font-semibold text-[#0A0D12]">CSS</h3>
+                <p class="text-sm font-normal text-[#414651] leading-6">
+                  Styles and enhances the visual presentation of web elements
+                </p>
+              </div>
+              <button
+                class="w-full py-3 px-6 bg-[#0093DD] rounded-full hover:bg-[#0078b4] transition-colors"
+              >
+                <span class="text-sm font-semibold text-white">Learn More</span>
+              </button>
+            </div>
+          </div>
+
+          <div
+            class="flex flex-col w-full bg-white border-card border-[#E9EAEB] rounded-2xl shadow-[0_4px_16px_rgba(176,176,176,0.25)] overflow-hidden"
+          >
+            <div class="w-full h-[297px] flex items-center justify-center">
+              <img
+                src="./assets/images/js-image.png"
+                alt="JavaScript"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-6 flex flex-col gap-4">
+              <div class="flex flex-col gap-2">
+                <h3 class="text-lg font-semibold text-[#0A0D12]">JavaScript</h3>
+                <p class="text-sm font-normal text-[#414651] leading-6">
+                  Adds interactivity and dynamic functionality to websites
+                </p>
+              </div>
+              <button
+                class="w-full py-3 px-6 bg-[#0093DD] rounded-full hover:bg-[#0078b4] transition-colors"
+              >
+                <span class="text-sm font-semibold text-white">Learn More</span>
+              </button>
+            </div>
+          </div>
+
+          <div
+            class="flex flex-col w-full bg-white border-card border-[#E9EAEB] rounded-2xl shadow-[0_4px_16px_rgba(176,176,176,0.25)] overflow-hidden"
+          >
+            <div class="w-full h-[297px] flex items-center justify-center">
+              <img
+                src="./assets/images/tailwind-image.png"
+                alt="Tailwind CSS"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-6 flex flex-col gap-4">
+              <div class="flex flex-col gap-2">
+                <h3 class="text-lg font-semibold text-[#0A0D12]">
+                  Tailwind CSS
+                </h3>
+                <p class="text-sm font-normal text-[#414651] leading-6">
+                  A utility-first CSS framework for fast and responsive UI
+                  design
+                </p>
+              </div>
+              <button
+                class="w-full py-3 px-6 bg-[#0093DD] rounded-full hover:bg-[#0078b4] transition-colors"
+              >
+                <span class="text-sm font-semibold text-white">Learn More</span>
+              </button>
+            </div>
+          </div>
+
+          <div
+            class="flex flex-col w-full bg-white border-card border-[#E9EAEB] rounded-2xl shadow-[0_4px_16px_rgba(176,176,176,0.25)] overflow-hidden"
+          >
+            <div class="w-full h-[297px] flex items-center justify-center">
+              <img
+                src="./assets/images/react-image.png"
+                alt="React JS"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-6 flex flex-col gap-4">
+              <div class="flex flex-col gap-2">
+                <h3 class="text-lg font-semibold text-[#0A0D12]">React JS</h3>
+                <p class="text-sm font-normal text-[#414651] leading-6">
+                  A JavaScript library for building dynamic and scalable user
+                  interfaces
+                </p>
+              </div>
+              <button
+                class="w-full py-3 px-6 bg-[#0093DD] rounded-full hover:bg-[#0078b4] transition-colors"
+              >
+                <span class="text-sm font-semibold text-white">Learn More</span>
+              </button>
+            </div>
+          </div>
+
+          <div
+            class="flex flex-col w-full bg-white border-card border-[#E9EAEB] rounded-2xl shadow-[0_4px_4px_rgba(0,0,0,0.25)] overflow-hidden"
+          >
+            <div class="w-full h-[297px] flex items-center justify-center">
+              <img
+                src="./assets/images/figma-image.png"
+                alt="Figma"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-6 flex flex-col gap-4">
+              <div class="flex flex-col gap-2">
+                <h3 class="text-lg font-semibold text-[#0A0D12]">Figma</h3>
+                <p class="text-sm font-normal text-[#414651] leading-6">
+                  A collaborative design tool for creating UI/UX prototypes and
+                  wireframes
+                </p>
+              </div>
+              <button
+                class="w-full py-3 px-6 bg-[#0093DD] rounded-full hover:bg-[#0078b4] transition-colors"
+              >
+                <span class="text-sm font-semibold text-white">Learn More</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--section edwin-->
+    <section class="w-full bg-white max-w-[1440px] mx-auto">
+      <div class="container mx-auto px-4 py-8">
+        <div
+          class="flex flex-col lg:flex-row items-center justify-between gap-8"
+        >
+          <div
+            class="w-full lg:w-1/2 flex flex-col items-center order-first lg:order-last"
+          >
+            <div class="w-full rounded-lg relative">
+              <img
+                src="./assets/images/edwins-image.png"
+                alt="Edwin Anderson"
+                class="w-full"
+              />
+
+              <div
+                class="absolute bottom-0 left-0 w-full p-4 from-[#0A0D12] lg:hidden rounded-full"
+              >
+                <h1 class="font-bold text-2xl leading-tight text-white">
+                  Learn React JS & Build Interactive Apps!
+                </h1>
+              </div>
+            </div>
+
+            <div class="grid-cols-2 gap-4 mt-4 w-full hidden md:grid">
+              <div class="rounded-lg flex items-center justify-center">
+                <img src="./assets/images/react-logo.png" alt="React Logo" />
+              </div>
+              <div class="rounded-lg flex items-center justify-center">
+                <img src="./assets/images/css3-logo.png" alt="CSS3 Logo" />
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="w-full lg:w-1/2 flex flex-col items-start gap-6 order-last lg:order-first"
+          >
+            <div class="flex items-center gap-1">
+              <img src="./assets/logo/one-star.png" alt="one-star" />
+              <span
+                class="font-sora font-semibold text-sm md:text-base leading-7 text-[#0A0D12]"
+                >4.9 (1,672) Best Module</span
+              >
+            </div>
+
+            <h1
+              class="font-bold text-2xl md:text-4xl lg:text-5xl leading-tight text-[#0A0D12] hidden lg:block"
+            >
+              Learn React JS & Build Interactive Apps!
+            </h1>
+
+            <p
+              class="font-sora font-normal text-sm md:text-base leading-7 text-[#252B37] max-w-lg"
+            >
+              A powerful JavaScript library used for building fast, dynamic, and
+              scalable user interfaces with a component-based architecture,
+              making development more efficient and maintainable.
+            </p>
+
+            <button
+              class="flex flex-row justify-center items-center px-6 py-3 gap-1 w-full md:w-auto bg-[#0093DD] rounded-full text-white font-sora font-semibold"
+            >
+              Get Access
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--section testimony-->
+    <section
+      class="w-full bg-[#FAFAFA] py-16 px-4 md:px-10 lg:px-20 max-w-[1440px] mx-auto"
+    >
+      <div class="max-w-4xl mx-auto text-center mb-12">
+        <h2
+          class="text-2xl md:text-3xl lg:text-4xl font-bold text-[#0A0D12] mb-4"
+        >
+          What Our Students Say
+        </h2>
+        <p
+          class="text-sm md:text-base font-normal text-[#252B37] max-w-2xl mx-auto"
+        >
+          Real stories from real learners who turned their goals into careers
+        </p>
+      </div>
+
+      <div class="max-w-7xl mx-auto">
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+        >
+          <div
+            class="bg-white p-6 rounded-2xl border-choose-your-path flex-col justify-between h-full hidden md:block"
+          >
+            <p class="text-base font-normal leading-[30px] text-[#0A0D12] mb-6">
+              "This bootcamp completely changed my life. The mentorship,
+              hands-on projects, and job support helped me land a frontend
+              developer role in just 4 months!"
+            </p>
+
+            <div class="mt-auto">
+              <div class="flex items-center gap-1 mb-4">
+                <div class="flex items-center gap-1 w-40 h-8">
+                  <img src="./assets/logo/star-icon.png" alt="star-icon" />
+                </div>
+              </div>
+
+              <div class="flex items-center gap-4">
+                <div
+                  class="w-12 h-12 rounded-full bg-[#F3F4F6] flex items-center justify-center"
+                >
+                  <span class="text-lg font-bold text-[#535862]">R</span>
+                </div>
+                <div>
+                  <h3 class="text-base font-semibold text-[#0A0D12]">
+                    Rizky Aulia
+                  </h3>
+                  <p class="text-sm text-[#535862]">Student</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="bg-white p-6 rounded-2xl border-choose-your-path flex flex-col justify-between h-full"
+          >
+            <p class="text-base font-normal leading-[30px] text-[#0A0D12] mb-6">
+              "I had zero tech background before joining, but the structured
+              learning path made it easy to follow. Now I'm interning at a tech
+              startup and loving it!"
+            </p>
+
+            <div class="mt-auto">
+              <div class="flex items-center gap-1 mb-4">
+                <div class="flex items-center gap-1 w-40 h-8">
+                  <img src="./assets/logo/star-icon.png" alt="star-icon" />
+                </div>
+              </div>
+
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-full overflow-hidden">
+                  <img
+                    src="./assets/logo/Male-avatar.png"
+                    alt="Jonathan Santoso"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <h3 class="text-base font-semibold text-[#0A0D12]">
+                    Jonathan Santoso
+                  </h3>
+                  <p class="text-sm text-[#535862]">Student</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="bg-white p-6 rounded-2xl border-choose-your-path flex-col justify-between h-full hidden md:block"
+          >
+            <p class="text-base font-normal leading-[30px] text-[#0A0D12] mb-6">
+              "The best part was the real-time mentor feedback. I felt like I
+              had a personal coach guiding me every step of the way."
+            </p>
+
+            <div class="mt-auto pt-6">
+              <div class="flex items-center gap-1 mb-4">
+                <div class="flex items-center gap-1 w-40 h-8">
+                  <img src="./assets/logo/star-icon.png" alt="star-icon" />
+                </div>
+              </div>
+
+              <div class="flex items-center relative inset-x-0 bottom-0">
+                <div class="w-12 h-12 rounded-full overflow-hidden">
+                  <img
+                    src="./assets/logo/Female-avatar.png"
+                    alt="Dina Ramadhani"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <h3 class="text-base font-semibold text-[#0A0D12]">
+                    Dina Ramadhani
+                  </h3>
+                  <p class="text-sm text-[#535862]">Student</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="flex justify-center md:justify-center max-w-7xl mx-auto mt-8 md:mt-12"
+      >
+        <div class="flex items-center gap-2">
+          <button class="w-9 h-9 ] flex items-center justify-center">
+            <img
+              src="./assets/logo/Previous-Arrow.png"
+              alt="Previous-Arrow"
+              class="w-[36px] h-[36px]"
+            />
+          </button>
+
+          <button class="w-9 h-9 e flex items-center justify-center">
+            <img
+              src="./assets/logo/Next-Arrow.png"
+              alt="Next-Arrow"
+              class="w-[36px] h-[36px]"
+            />
+          </button>
+        </div>
+      </div>
+    </section>
+    <!--section faq-->
+    <section class="faq-section max-w-[1440px] mx-auto">
+      <div class="container">
+        <div class="section-header">
+          <h1 class="section-title">Frequently Asked Questions</h1>
+          <p class="section-description">
+            Everything you need to know before starting your journey to become a
+            frontend developer.
+          </p>
+        </div>
+
+        <div class="faq-container">
+          <div class="faq-item expanded">
+            <div class="faq-question">
+              <h2>Do I need any coding experience to join?</h2>
+              <div class="icon minus-icon"></div>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Nope! Our program is beginner-friendly and designed to guide you
+                from zero to job-ready, even if you've never written a single
+                line of code.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h2>How long does it take to complete the program?</h2>
+              <div class="icon plus-icon"></div>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Most students complete the program in 3 to 6 months, depending
+                on their pace and availability. You can learn part-time or
+                full-time.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h2>What kind of support will I get during the program?</h2>
+              <div class="icon plus-icon"></div>
+            </div>
+            <div class="faq-answer">
+              <p>
+                You'll get 1-on-1 mentorship, live feedback on your projects,
+                and access to a private community for peer support and Q&A with
+                industry professionals.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h2>Will I build a portfolio during the course?</h2>
+              <div class="icon plus-icon"></div>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Absolutely. You'll work on real-world projects that you can
+                showcase in your portfolio — an essential part of landing your
+                first job.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <h2>Do you offer job placement assistance?</h2>
+              <div class="icon plus-icon"></div>
+            </div>
+            <div class="faq-answer">
+              <p>
+                Yes! We provide career coaching, resume reviews, mock
+                interviews, and job-hunting strategies to help you land your
+                dream role.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--section cta-->
+    <section class="max-w-[1440px] mx-auto">
+      <div
+        class="relative flex flex-col items-center p-[40px_20px] md:p-[60px_40px] gap-[30px] w-full h-[270px] md:h-[360px] isolate bg-black"
+        style="
+          background-image: url('./assets/images/bg-yourfuture.png');
+          background-size: cover;
+          background-position: center;
+        "
+      >
+        <div
+          class="flex flex-col items-center gap-[16px] w-full max-w-[353px] md:max-w-[800px] z-[1]"
+        >
+          <h1
+            class="w-full text-[24px] md:text-[42px] font-extrabold leading-[36px] md:leading-[52px] text-center text-white"
+          >
+            Your Future Starts Here!
+          </h1>
+
+          <p
+            class="w-full text-[18px] md:text-[20px] font-normal leading-[32px] md:leading-[36px] text-center text-[#D5D7DA]"
+          >
+            Enroll today and become a Frontend Developers in just months
+          </p>
+        </div>
+
+        <button
+          class="flex flex-row justify-center items-center p-[8px] md:p-[10px] gap-[4px] w-full max-w-[353px] md:max-w-[240px] h-[44px] md:h-[52px] bg-[#0093DD] rounded-full z-[2] hover:bg-[#007bbd] transition-colors"
+        >
+          <span
+            class="text-[14px] md:text-[16px] font-semibold leading-[28px] text-white"
+          >
+            Join Now
+          </span>
+        </button>
+      </div>
+    </section>
+    <!--section footer-->
+    <footer
+      class="box-border flex flex-col md:flex-row md:justify-between justify-center items-center p-6 w-full bg-black border-t border-[#252B37] max-w-[1440px] mx-auto"
+    >
+      <div class="flex flex-row items-center p-0 gap-4 w-24 h-10 md:order-1">
+        <div
+          class="w-10 h-10 bg-black border border-[#252B37] rounded-full relative"
+        >
+          <img src="./assets/logo/Instagram.png" alt="instagram" />
+        </div>
+
+        <div
+          class="w-10 h-10 bg-black border border-[#252B37] rounded-full relative"
+        >
+          <img src="./assets/logo/Linkedin.png" alt="LinkedIn" />
+        </div>
+      </div>
+
+      <div
+        class="flex flex-row items-center px-4 gap-4 md:order-2 mt-6 md:mt-0"
+      >
+        <span
+          class="text-sm font-normal text-[#A4A7AE] text-center font-sora leading-7"
+          >Terms & Conditions</span
+        >
+        <span class="w-1 h-1 bg-[#D9D9D9] rounded-full"></span>
+        <span
+          class="text-sm font-normal text-[#A4A7AE] text-center font-sora leading-7"
+          >Privacy Policy</span
+        >
+      </div>
+    </footer>
+  </body>
+</html>
